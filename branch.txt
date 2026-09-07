@@ -1,0 +1,63 @@
+Как се създава среда за проект
+Средата включва:
+
+VS Code — редактор
+Node.js — стартира JavaScript/React проекти
+Git — следи промените
+GitHub — съхранява проекта онлайн
+Стъпки
+1. Създаваш папка
+Например:
+
+AviationLines
+
+Отваряш папката във VS Code.
+
+2. Създаваш React проект
+В терминала изпълняваш:
+
+npm create vite@latest .
+
+Следваш въпросите и избираш React + TypeScript.
+
+После:
+
+npm install
+
+3. Стартираш проекта
+npm run dev
+
+Проектът се отваря на адрес като:
+
+http://localhost:5173
+
+Свързване с GitHub
+1. Създаваш repository в GitHub
+Например:
+
+AviationLines
+
+2. Свързваш локалната папка с GitHub
+В терминала:
+
+git init
+
+git remote add origin https://github.com/MaximNikolaevv/AviationLines.git
+
+3. Качваш проекта
+git add .
+
+git commit -m "Initial project setup"
+
+git branch -M main
+
+git push -u origin main
+
+При следващи промени
+Всеки път използваш:
+
+git add .
+
+git commit -m "Описание на промяната"
+
+git push
