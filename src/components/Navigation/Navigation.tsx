@@ -15,7 +15,7 @@ export default function Navigation() {
     <nav className="nav">
       <div className="nav-left">
         <Link className="nav-logo" to="/">
-          PlanesOnLive
+          PlanesOnLive🔴
         </Link>
         <Link to="/BrowseFlights" className="btn-Flights">
           Browse Flights

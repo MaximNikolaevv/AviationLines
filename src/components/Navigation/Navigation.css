@@ -49,11 +49,6 @@
   letter-spacing: -0.01em;
 }
 
-.nav-logo::before {
-  content: "✈";
-  color: var(--accent);
-  font-size: 15px;
-}
 
 .btn-Flights,
 .btn-Weather {
