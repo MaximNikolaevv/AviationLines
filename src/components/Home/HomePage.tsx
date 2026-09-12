@@ -1,20 +1,26 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./HomePage.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Homepage() {
-  const [planes, setPlanes] = useState([]);
+  // const [, setPlanes] = useState([]);
 
   useEffect(() => {
-    setInterval(async () => {
-        
-      const response = await fetch("http://localhost:5000/api/flights");
-      const planes = await response.json();
+    const loadPlanes = async () => {
+      const response = await fetch("http://localhost:3000/api/flights");
+      const planesInfo = await response.json();
+      // setPlanes(planesInfo);
+      console.log(planesInfo);
 
-      setPlanes(planes);
-    }, 12000);
-  }, []);
+    };
+
+    loadPlanes(); // веднага при mount
+
+    const timer = setInterval(loadPlanes, 11000);
+
+    return () => clearInterval(timer); // спира интервала при unmount/re-run
+  }, []); // ← празен масив - изпълнява се само веднъж
 
   return (
     <MapContainer
