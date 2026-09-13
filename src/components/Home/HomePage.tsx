@@ -1,26 +1,34 @@
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./HomePage.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { divIcon } from "leaflet";
 
 export default function Homepage() {
-  // const [, setPlanes] = useState([]);
+  const [planesInfo, setPlanes] = useState({ states: [] });
 
   useEffect(() => {
     const loadPlanes = async () => {
       const response = await fetch("http://localhost:3000/api/flights");
       const planesInfo = await response.json();
-      // setPlanes(planesInfo);
-      console.log(planesInfo);
-
+      setPlanes(planesInfo);
     };
 
     loadPlanes(); // веднага при mount
 
-    const timer = setInterval(loadPlanes, 11000);
+    const timer = setInterval(loadPlanes, 5000);
 
     return () => clearInterval(timer); // спира интервала при unmount/re-run
   }, []); // ← празен масив - изпълнява се само веднъж
+
+  const createPlaneIcon = (heading: never) =>
+    divIcon({
+      html: `<img src="https://cdn-icons-png.flaticon.com/128/17796/17796836.png"
+              style="width: 20px; height: 20px; transform: rotate(${heading}deg);" />`,
+      className: "plane-marker",
+      iconSize: [20, 20],
+      
+    });
 
   return (
     <MapContainer
@@ -33,6 +41,14 @@ export default function Homepage() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+
+      {planesInfo.states?.map((plane) => (
+        <Marker
+          key={plane[0]}
+          position={[plane[6], plane[5]]}
+          icon={createPlaneIcon(plane[10])}
+        ></Marker>
+      ))}
     </MapContainer>
   );
 }
