@@ -6,9 +6,13 @@ export default function Navigation() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {  // useEffect se izpulnqva sled render-a! 
-    setInterval(() => {
+
+    const intervalId = setInterval(() => {
+
       setTime(new Date()); // pri vsqka promqna na SetTime UI se zarejda otnovo s novite promeni
     }, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
