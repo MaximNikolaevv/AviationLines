@@ -85,6 +85,25 @@
   font-size: 12px;
 }
 
+.plane-popup-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.plane-popup-label {
+  color: #8b98a8;
+}
+
+.plane-popup-value {
+  color: #e8ecf1;
+  font-weight: 500;
+  text-align: right;
+}
+
 .leaflet-popup-tip {
   background: #12181f;
   border: 1px solid rgba(232, 236, 241, 0.1);

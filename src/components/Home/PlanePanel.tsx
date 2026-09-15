@@ -1,6 +1,7 @@
-import "./PlanePanel.css";
+import type { PlanePanelProps } from "./Home";
+import "./Popup.css";
  
-export default function PlanePanel({ plane, onClose }) {
+export default function PlanePanel({ plane, onClose }: PlanePanelProps) {
   if (!plane) return null;
  
   const [icao24, callsign, country, longitude, latitude, altitude, onGround, velocity, heading] = plane;
