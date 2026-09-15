@@ -6,16 +6,20 @@ export default function Navigation() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {  // useEffect se izpulnqva sled render-a! 
-    setInterval(() => {
+
+    const intervalId = setInterval(() => {
+
       setTime(new Date()); // pri vsqka promqna na SetTime UI se zarejda otnovo s novite promeni
     }, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
 
   return (
     <nav className="nav">
       <div className="nav-left">
         <Link className="nav-logo" to="/">
-          PlanesOnLive
+          PlanesOnLive🔴
         </Link>
         <Link to="/BrowseFlights" className="btn-Flights">
           Browse Flights
