@@ -26,56 +26,6 @@
   display: flex;
   align-items: center;
   gap: 6px;
-}
-
-.plane-popup-country::before {
-  content: "✈";
-  color: #4ade80;
-  font-size: 12px;
-}
-
-.leaflet-popup-tip {
-  background: #12181f;
-  border: 1px solid rgba(232, 236, 241, 0.1);
-  box-shadow: none;
-}
-
-.leaflet-popup-close-button {
-  color: #5a6472 !important;
-  font-size: 16px !important;
-  top: 8px !important;
-  right: 8px !important;
-}
-
-.leaflet-popup-close-button:hover {
-  color: #e8ecf1 !important;
-}/* ===== Popup styling ===== */
-.leaflet-popup-content-wrapper {
-  background: #12181f;
-  color: #e8ecf1;
-  border-radius: 8px;
-  border: 1px solid rgba(232, 236, 241, 0.1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
-}
-
-.leaflet-popup-content {
-  margin: 0;
-  min-width: 140px;
-}
-
-.plane-popup {
-  padding: 12px 14px;
-}
-
-.plane-popup-country {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #e8ecf1;
-  display: flex;
-  align-items: center;
-  gap: 6px;
   margin-bottom: 5px;
 }
 
@@ -119,4 +69,76 @@
 
 .leaflet-popup-close-button:hover {
   color: #e8ecf1 !important;
+}
+
+.plane-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 500;
+  width: min(320px, calc(100% - 32px));
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.45);
+  color: #e2e8f0;
+  padding: 18px 18px 14px;
+  backdrop-filter: blur(8px);
+}
+
+.plane-panel-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.plane-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-right: 24px;
+}
+
+.plane-panel-icon {
+  font-size: 22px;
+  color: #4ade80;
+}
+
+.plane-panel-callsign {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.plane-panel-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 14px;
+}
+
+.plane-panel-row:last-child {
+  border-bottom: none;
+}
+
+.plane-panel-label {
+  color: #94a3b8;
+}
+
+.plane-panel-value {
+  color: #f8fafc;
+  text-align: right;
+  word-break: break-word;
+}
+
+.home-map {
+  position: relative;
 }

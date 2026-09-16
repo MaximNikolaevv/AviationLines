@@ -3,9 +3,9 @@ import "./Popup.css";
  
 export default function PlanePanel({ plane, onClose }: PlanePanelProps) {
   if (!plane) return null;
- 
-  const [icao24, callsign, country, longitude, latitude, altitude, onGround, velocity, heading] = plane;
- 
+
+  const [icao24, callsign, country, , , longitude, latitude, altitude, onGround, velocity, heading] = plane;
+
   return (
     <aside className="plane-panel">
       <button className="plane-panel-close" onClick={onClose}>
