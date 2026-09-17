@@ -1,4 +1,36 @@
 import "./Register.css";
+import useRegister from "./UseRegisterHook";
+
+export default function Register() {
+  const { register, loading } = useRegister();
+
+  const onSubmit = async (e: {
+    preventDefault: () => void;
+    target: HTMLFormElement | undefined;
+  }) => {
+    e.preventDefault(); 
+
+    const formData = new FormData(e.target);
+    const values = Object.fromEntries(formData);
+
+    if (values.password !== values["confirm-password"]) {
+      return console.log("Passwords do not match");
+    }
+
+    if (!values.email || !values.password || !values["confirm-password"]) {
+      return console.log("All fields are required");
+    }
+
+    await register({
+      fullname: values.fullname as string,
+      email: values.email as string,
+      country: values.country as string,
+      password: values.password as string,
+    });
+
+    console.log(values); // тук вече имаш всички данни от формата
+  };
+
   return (
     <div className="register-page">
       <div className="register-card">
@@ -76,8 +108,8 @@ import "./Register.css";
           </div>
 
           <button disabled={loading}>
-                {loading ? "Registering..." : "Register"}
-            </button>
+            {loading ? "Registering..." : "Register"}
+          </button>
         </form>
 
         <p className="login-link">

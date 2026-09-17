@@ -7,14 +7,13 @@ import { divIcon } from "leaflet";
 import PlanePanel from "./PlanePanel.tsx";
 import type { Plane, PlanesInfo } from "./Home.ts";
 
-
 export default function Homepage() {
   const [planesInfo, setPlanes] = useState<PlanesInfo>({ states: [] });
   const [selectedPlane, setSelectedPlane] = useState<Plane | null>(null);
 
   useEffect(() => {
     const loadPlanes = async () => {
-      const response = await fetch("http://localhost:3000/api/flights");
+      const response = await fetch("http://localhost:3000/info/flights");
       const planesInfo = await response.json();
       setPlanes(planesInfo);
     };
