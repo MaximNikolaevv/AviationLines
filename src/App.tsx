@@ -1,7 +1,7 @@
 import Navigation from "./components/Navigation/Navigation";
 import HomePage from "./components/Home/HomePage";
 import { Routes, Route } from "react-router-dom";
-import Register from "./components/Register/register";
+import Register from "./components/Register/register.tsx";
 
 function App() {
   return (

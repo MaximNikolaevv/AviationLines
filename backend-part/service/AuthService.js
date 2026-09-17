@@ -1,10 +1,12 @@
-import User from "../models/auth.js";
-
+import User from "../models/models.js";
 
 export default {
+  async registedUser(userData) {
+    return await User.create(userData);
+  },
 
-    async registedUser(userData) {
+  async findUserByEmail(email) {
+    return await User.findOne({ email });
+  },
+};
 
-        return await User.create(userData);
-    },
-}

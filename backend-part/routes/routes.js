@@ -5,6 +5,6 @@ import AuthControllers from "../Controllers/authControllers.js";
 const router = Router();
 
 router.use("/info", Controllers);
-router.use("api", AuthControllers);
+router.use("/api", AuthControllers);
 
 export default router;
