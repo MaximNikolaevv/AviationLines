@@ -6,16 +6,12 @@ import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = 3000;
-const MONGO_HOST = "127.0.0.1";
-const MONGO_PORT = 27017;
-const MONGO_DB_NAME = "aviationlines";
-const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB_NAME}`;
 
 app.use(express.json());
 
-// Позволява заявки от Vite frontend-а.
+// CORS
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type");
 
@@ -26,11 +22,11 @@ app.use((req, res, next) => {
   next();
 });
 
+const MONGO_URI = "mongodb://localhost:27017/aviationlines";
+
 const connectMongo = async () => {
   try {
-    await mongoose.connect(MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-    });
+    await mongoose.connect(MONGO_URI);
     console.log("MongoDB connected");
   } catch (error) {
     console.error("MongoDB connection failed:", error.message);

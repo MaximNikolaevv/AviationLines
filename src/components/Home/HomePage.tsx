@@ -46,28 +46,26 @@ export default function Homepage() {
       />
 
       {planesInfo.states?.map((plane) => (
-        <>
-          <Marker
-            key={plane[0]}
-            position={[plane[6], plane[5]]}
-            icon={createPlaneIcon(plane[10])}
-            eventHandlers={{ click: () => setSelectedPlane(plane) }}
-          >
-            <Popup>
-              <div className="plane-popup">
-                <div className="plane-popup-country">{plane[2]}</div>
-                <div className="plane-popup-row">
-                  <span className="plane-popup-label">Altitude: </span>
-                  <span className="plane-popup-value">{plane[7]} m</span>
-                </div>
-                <div className="plane-popup-row">
-                  <span className="plane-popup-label">Speed: </span>
-                  <span className="plane-popup-value">{plane[9]} m/s</span>
-                </div>
+        <Marker
+          key={String(plane[0] ?? `${plane[5]}-${plane[6]}`)}
+          position={[plane[6], plane[5]]}
+          icon={createPlaneIcon(plane[10])}
+          eventHandlers={{ click: () => setSelectedPlane(plane) }}
+        >
+          <Popup>
+            <div className="plane-popup">
+              <div className="plane-popup-country">{plane[2]}</div>
+              <div className="plane-popup-row">
+                <span className="plane-popup-label">Altitude: </span>
+                <span className="plane-popup-value">{plane[7]} m</span>
               </div>
-            </Popup>
-          </Marker>
-        </>
+              <div className="plane-popup-row">
+                <span className="plane-popup-label">Speed: </span>
+                <span className="plane-popup-value">{plane[9]} m/s</span>
+              </div>
+            </div>
+          </Popup>
+        </Marker>
       ))}
 
       {selectedPlane && (
