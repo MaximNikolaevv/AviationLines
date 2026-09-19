@@ -1,6 +1,7 @@
 import Navigation from "./components/Navigation/Navigation";
 import HomePage from "./components/Home/HomePage";
 import { Routes, Route } from "react-router-dom";
+import Register from "./components/Register/register.tsx";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <main id="main-content">
         <Routes>
           <Route index path="/" element={<HomePage />}></Route>
-          
+          <Route path="/register" element={<Register />}></Route>
         </Routes>
       </main>
     </div>
