@@ -8,6 +8,12 @@ Controllers.get("/flights", async (req, res) => {
       "https://opensky-network.org/api/states/all?lamin=41.2&lamax=44.3&lomin=22.3&lomax=28.7",
     );
 
+    if (!response.ok) {
+      return res
+        .status(response.status)
+        .json({ error: `OpenSky request failed with status ${response.status}` });
+    }
+
     console.log("Remaining:", response.headers.get("x-rate-limit-remaining"));
     console.log("Retry after:", response.headers.get("x-rate-limit-retry-after-seconds"));
 
