@@ -13,9 +13,18 @@ export default function Homepage() {
 
   useEffect(() => {
     const loadPlanes = async () => {
-      const response = await fetch("http://localhost:3000/info/flights");
-      const planesInfo = await response.json();
-      setPlanes(planesInfo);
+      try {
+        const response = await fetch("/info/flights");
+
+        if (!response.ok) {
+          throw new Error(`Flights request failed with status ${response.status}`);
+        }
+
+        const planesInfo = await response.json();
+        setPlanes(planesInfo);
+      } catch (error) {
+        console.error("Failed to load flight information:", error);
+      }
     };
 
     loadPlanes(); // веднага при mount

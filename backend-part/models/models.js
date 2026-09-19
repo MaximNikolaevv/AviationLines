@@ -29,13 +29,8 @@ const authSchema = new Schema(
   { timestamps: true },
 );
 
-authSchema.pre("save", async function hashPassword(next) {
-  try {
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-  } catch (error) {
-    next(error);
-  }
+authSchema.pre("save", async function hashPassword() {
+  this.password = await bcrypt.hash(this.password, 10);
 });
 
 const User = model("User", authSchema);
