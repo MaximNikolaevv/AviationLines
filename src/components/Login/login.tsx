@@ -1,21 +1,33 @@
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useLogin from "./UseLoginHook.tsx";
 
 export default function Login() {
-  const onSubmit = (e: {
+  const { login, loading} = useLogin();
+  const navigate = useNavigate();
+
+  const onSubmit = async (e: {
     preventDefault: () => void;
-    target: HTMLFormElement | undefined;
+    currentTarget: HTMLFormElement;
   }) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
     const values = Object.fromEntries(formData);
 
     if (!values.email || !values.password) {
       return console.log("All fields are required");
     }
 
-    console.log(values);
+    const result = await login({
+      email: values.email as string,
+      password: values.password as string,
+    });
+
+    if (result) {
+      navigate("/");
+    }
+    
   };
 
   return (
@@ -51,8 +63,8 @@ export default function Login() {
             />
           </div>
 
-          <button type="submit" className="submit-btn">
-            Вход
+          <button type="submit" disabled={loading} className="submit-btn">
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 

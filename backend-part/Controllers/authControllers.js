@@ -42,4 +42,31 @@ AuthControllers.post("/register", async (req, res) => {
   }
 });
 
+AuthControllers.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
+
+    const user = await AuthService.login({ email, password });
+    const jwt = await createToken(user);
+    res.cookie("auth", jwt, { httpOnly: true,});
+
+    return res.json({
+      message: "Login successful",
+      user: {
+        id: user._id,
+        fullname: user.fullname,
+        email: user.email,
+        country: user.country,
+      },
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+    return res.status(401).json({ message: "Invalid email or password" });
+  }
+});
+
 export default AuthControllers;
