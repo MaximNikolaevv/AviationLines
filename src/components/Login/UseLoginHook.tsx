@@ -4,7 +4,6 @@ import type { LoginData } from "./LoginTypes";
 function useLogin() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  
 
   async function login(userData: LoginData) {
     setLoading(true);

@@ -20,6 +20,7 @@ export default {
     const isPassword = await bcrypt.compare(userData.password, user.password);
 
     if (!isPassword) {
+      console.log("Incorrect password");
       throw new Error("Invalid email or password");
     }
 

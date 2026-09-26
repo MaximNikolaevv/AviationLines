@@ -26,6 +26,7 @@ AuthControllers.post("/register", async (req, res) => {
 
     const jwt = await createToken(user);
     res.cookie("auth", jwt, { httpOnly: true });
+    console.log("Register auth cookie:", jwt);
 
     return res.status(201).json({
       message: "User registered successfully",
@@ -53,6 +54,7 @@ AuthControllers.post("/login", async (req, res) => {
     const user = await AuthService.login({ email, password });
     const jwt = await createToken(user);
     res.cookie("auth", jwt, { httpOnly: true,});
+    console.log("Login auth cookie:", jwt);
 
     return res.json({
       message: "Login successful",
