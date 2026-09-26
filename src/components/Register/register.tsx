@@ -1,8 +1,11 @@
 import "./Register.css";
 import useRegister from "./UseRegisterHook";
+import { Link, useNavigate } from "react-router-dom";
+
 
 export default function Register() {
   const { register, loading } = useRegister();
+  const navigate = useNavigate();
 
   const onSubmit = async (e: {
     preventDefault: () => void;
@@ -27,6 +30,8 @@ export default function Register() {
       country: values.country as string,
       password: values.password as string,
     });
+
+    navigate("/");
 
     console.log(values); // тук вече имаш всички данни от формата
   };
@@ -113,7 +118,7 @@ export default function Register() {
         </form>
 
         <p className="login-link">
-          Вече имаш акаунт? <a href="/login">Вход</a>
+          Вече имаш акаунт? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
