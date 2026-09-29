@@ -1,6 +1,6 @@
 import { Router } from "express";
 import AuthService from "../service/AuthService.js";
-import { createToken } from '../JWT/JsWebToken.js';
+import { createToken } from "../JWT/JsWebToken.js";
 
 const AuthControllers = Router();
 
@@ -48,12 +48,14 @@ AuthControllers.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required" });
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
     }
 
     const user = await AuthService.login({ email, password });
     const jwt = await createToken(user);
-    res.cookie("auth", jwt, { httpOnly: true,});
+    res.cookie("auth", jwt, { httpOnly: true });
     console.log("Login auth cookie:", jwt);
 
     return res.json({
@@ -69,6 +71,11 @@ AuthControllers.post("/login", async (req, res) => {
     console.error("Login error:", err);
     return res.status(401).json({ message: "Invalid email or password" });
   }
+});
+
+AuthControllers.post("/logout", (_req, res) => {
+  res.clearCookie("auth");
+  return res.sendStatus(204);
 });
 
 export default AuthControllers;
