@@ -11,7 +11,7 @@ function useLogout() {
 			try {
 				const response = await fetch("/api/logout", { method: "POST" });
 				if (!response.ok) throw new Error("Logout failed. Please try again.");
-				navigate("/", { replace: true });
+				navigate("/");
 			} catch (error) {
 				setError(error instanceof Error ? error.message : "Logout failed.");
 				setLoading(false);
