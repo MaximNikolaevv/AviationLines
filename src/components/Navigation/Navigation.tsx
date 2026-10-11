@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import "./Navigation.css";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../../context/context";
 
 export default function Navigation() {
   const [time, setTime] = useState(new Date());
+  const { isLogged } = useUserContext();
 
-  useEffect(() => {  // useEffect se izpulnqva sled render-a! 
+  useEffect(() => {
+    // useEffect se izpulnqva sled render-a!
 
     const intervalId = setInterval(() => {
-
       setTime(new Date()); // pri vsqka promqna na SetTime UI se zarejda otnovo s novite promeni
     }, 1000);
 
@@ -18,17 +20,8 @@ export default function Navigation() {
   return (
     <nav className="nav">
       <div className="nav-left">
-
         <Link className="nav-logo" to="/">
           PlanesOnLive🔴
-        </Link>
-
-        <Link to="/BrowseFlights" className="btn-Flights">
-          Browse Flights
-        </Link>
-
-        <Link to="/BrowseWeather" className="btn-Weather">
-          Browse Weather
         </Link>
 
         <span className="clock">{time.toLocaleTimeString()}</span>
@@ -37,18 +30,29 @@ export default function Navigation() {
       <div className="nav-right">
         <span className="welcome"></span>
 
-        <Link to="/logout" className="btn-logout">
-          Logout
-        </Link>
+        {isLogged ? (
+          <>
+            <Link to="/logout" className="btn-logout">
+              Logout
+            </Link>
+            <Link to="/BrowseFlights" className="btn-Flights">
+              Browse Flights
+            </Link>
+            <Link to="/BrowseWeather" className="btn-Weather">
+              Browse Weather
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="btn-login">
+              Login
+            </Link>
 
-        <Link to="/login" className="btn-login">
-          Login
-        </Link>
-
-        <Link to="/register" className="btn-register">
-          Register
-        </Link>
-        
+            <Link to="/register" className="btn-register">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
