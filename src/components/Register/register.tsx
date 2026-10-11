@@ -1,10 +1,12 @@
 import "./Register.css";
 import useRegister from "./UseRegisterHook";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserContext } from "../../context/context";
 
 
 export default function Register() {
   const { register, loading } = useRegister();
+  const { setIsLogged } = useUserContext();
   const navigate = useNavigate();
 
   const onSubmit = async (e: {
@@ -24,14 +26,17 @@ export default function Register() {
       return console.log("All fields are required");
     }
 
-    await register({
+    const result = await register({
       fullname: values.fullname as string,
       email: values.email as string,
       country: values.country as string,
       password: values.password as string,
     });
 
-    navigate("/");
+    if (result) {
+      setIsLogged(true);
+      navigate("/");
+    }
 
     console.log(values); // тук вече имаш всички данни от формата
   };

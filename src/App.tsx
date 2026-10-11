@@ -4,18 +4,11 @@ import { Routes, Route } from "react-router-dom";
 import Register from "./components/Register/register.tsx";
 import Login from "./components/Login/login.tsx";
 import Logout from "./components/Logout/logout";
-import { useState, type Dispatch, type SetStateAction } from "react";
-import { createTypedContext } from "./context/createTypedContext";
-
-type UserContextValue = {
-  isLogged: boolean;
-  setIsLogged: Dispatch<SetStateAction<boolean>>;
-};
-
-const { Context: UserContext } = createTypedContext<UserContextValue>();
+import { useState } from "react";
+import { UserContext } from "./context/context";
 
 function App() {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState<boolean>(false);
 
   return (
     <UserContext.Provider value={{ isLogged, setIsLogged }}>

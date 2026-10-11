@@ -1,9 +1,11 @@
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import useLogin from "./UseLoginHook.tsx";
+import { useUserContext } from "../../context/context";
 
 export default function Login() {
   const { login, loading} = useLogin();
+  const { setIsLogged } = useUserContext();
   const navigate = useNavigate();
 
   const onSubmit = async (e: {
@@ -25,6 +27,7 @@ export default function Login() {
     });
 
     if (result) {
+      setIsLogged(true);
       navigate("/");
     }
     
