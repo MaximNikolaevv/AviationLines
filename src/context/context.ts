@@ -1,5 +1,8 @@
 import { createContext, useContext } from "react";
 
+export function useUserContext() {
+    return useContext(UserContext);
+}
 export type UserContextValue = {
     isLogged: boolean;
     setIsLogged: (value: boolean) => void;
@@ -7,9 +10,5 @@ export type UserContextValue = {
 
 export const UserContext = createContext<UserContextValue>({
     isLogged: false,
-    setIsLogged: () => undefined,
+    setIsLogged: () => undefined
 });
-
-export function useUserContext() {
-    return useContext(UserContext);
-}
