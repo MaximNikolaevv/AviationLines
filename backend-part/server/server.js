@@ -5,8 +5,8 @@ import authMiddlewares from "../MiddleWares/MiddleWare.js";
 import cookieParser from "cookie-parser";
 
 const app = express();
-const PORT = 3000;
 
+const PORT = 3000;
 app.use(express.json());
 
 // CORS
