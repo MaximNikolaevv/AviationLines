@@ -35,7 +35,7 @@ export default function Register() {
 
     if (result) {
       setIsLogged(true);
-      navigate("/");
+      navigate("/verify");
     }
 
     console.log(values); // тук вече имаш всички данни от формата

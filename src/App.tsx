@@ -6,6 +6,7 @@ import Login from "./components/Login/login.tsx";
 import Logout from "./components/Logout/logout";
 import { useState } from "react";
 import { UserContext } from "./context/context";
+import Verify from "./components/Verification/verification.tsx";
 
 function App() {
   const [isLogged, setIsLogged] = useState<boolean>(false);
@@ -21,6 +22,7 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/logout" element={<Logout />}></Route>
+            <Route path="/verify" element={<Verify />}></Route>
           </Routes>
         </main>
       </div>

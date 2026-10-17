@@ -1,0 +1,564 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: #f4f7fb;
+
+    background:
+        linear-gradient(
+            rgba(3, 24, 27, 0.72),
+            rgba(2, 18, 21, 0.92)
+        ),
+        url("../../../img/Airplane.webp");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 102px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 8%;
+
+    background: rgba(3, 20, 23, 0.88);
+
+    border-bottom: 1px solid rgba(55, 220, 176, 0.2);
+
+    backdrop-filter: blur(14px);
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #f4f7fb;
+
+    text-decoration: none;
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: #38e0b0;
+}
+
+.logo-icon {
+    color: #38e0b0;
+
+    font-size: 30px;
+}
+
+
+.back-login {
+    color: #a9c1bd;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    transition: 0.2s ease;
+}
+
+.back-login:hover {
+    color: #42e5b7;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.verify-page {
+    min-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px 20px;
+}
+
+.back-main {
+    width: 100%;
+    max-width: 560px;
+    margin-bottom: 16px;
+
+    display: inline-flex;
+    align-items: center;
+
+    color: #a9c1bd;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+
+    transition: color 0.2s ease;
+}
+
+.back-main:hover {
+    color: #42e5b7;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.verify-card {
+    width: 100%;
+    max-width: 560px;
+
+    padding: 48px 48px 38px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(4, 29, 31, 0.95),
+            rgba(2, 20, 23, 0.97)
+        );
+
+    border: 1px solid rgba(55, 220, 176, 0.45);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        0 0 50px rgba(45, 210, 170, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    backdrop-filter: blur(20px);
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.verify-icon {
+    position: relative;
+
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #42e5b7;
+
+    font-size: 44px;
+
+    border: 2px solid #36d9aa;
+
+    border-radius: 22px;
+
+    background: rgba(40, 210, 165, 0.07);
+
+    box-shadow:
+        0 0 35px rgba(40, 220, 170, 0.12);
+}
+
+.verify-icon span {
+    position: absolute;
+
+    right: -10px;
+    bottom: -8px;
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #04251f;
+
+    background: #3ce2b0;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    border: 3px solid #061d20;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.verify-card h1 {
+    margin-bottom: 14px;
+
+    font-size: 36px;
+
+    line-height: 1.15;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
+
+.verify-card h1 span {
+    color: #3ce2b0;
+}
+
+.description {
+    color: #a9bfbd;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+.email {
+    margin-top: 4px;
+
+    color: #ffffff;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.verify-form {
+    margin-top: 32px;
+}
+
+
+/* =========================
+   CODE INPUTS
+========================= */
+
+.code-inputs {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.code-inputs input {
+    width: 58px;
+    height: 64px;
+
+    text-align: center;
+
+    color: #ffffff;
+
+    font-size: 26px;
+
+    font-weight: 600;
+
+    background: rgba(5, 31, 32, 0.8);
+
+    border: 2px solid #315652;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.code-inputs input:focus {
+    border-color: #3ce2b0;
+
+    box-shadow:
+        0 0 0 4px rgba(60, 226, 176, 0.10),
+        0 0 25px rgba(60, 226, 176, 0.16);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   EXPIRATION
+========================= */
+
+.expiration {
+    margin-top: 22px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 7px;
+
+    color: #8da8a4;
+
+    font-size: 15px;
+}
+
+.expiration strong {
+    color: #3ce2b0;
+}
+
+.clock {
+    color: #3ce2b0;
+
+    font-size: 22px;
+}
+
+
+/* =========================
+   RESEND
+========================= */
+
+.resend {
+    margin-top: 26px;
+}
+
+.resend p {
+    margin-bottom: 7px;
+
+    color: #849d99;
+
+    font-size: 15px;
+}
+
+.resend button {
+    padding: 0;
+
+    border: none;
+
+    background: none;
+
+    color: #3ce2b0;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.resend button:hover {
+    color: #70f1c8;
+}
+
+
+/* =========================
+   VERIFY BUTTON
+========================= */
+
+.verify-button {
+    width: 100%;
+
+    height: 56px;
+
+    margin-top: 30px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #39e0b0,
+            #18b889
+        );
+
+    color: #04231d;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(25, 200, 150, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.verify-button span {
+    margin-left: 8px;
+
+    font-size: 22px;
+}
+
+.verify-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 30px rgba(30, 215, 165, 0.30);
+}
+
+.verify-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   SECURITY MESSAGE
+========================= */
+
+.security-message {
+    margin-top: 26px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #708d88;
+
+    font-size: 14px;
+}
+
+.security-message span {
+    color: #3ce2b0;
+
+    font-size: 21px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+    .verify-page {
+        padding: 36px 16px;
+    }
+
+    .back-main {
+        max-width: 100%;
+        margin-bottom: 12px;
+        font-size: 15px;
+    }
+
+    .navbar {
+        height: 80px;
+
+        padding: 0 25px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .logo-icon {
+        font-size: 24px;
+    }
+
+    .back-login {
+        font-size: 14px;
+    }
+
+    .verify-card {
+        padding: 40px clamp(16px, 5vw, 25px) 36px;
+
+        border-radius: 18px;
+    }
+
+    .verify-icon {
+        width: 72px;
+        height: 72px;
+        margin-bottom: 28px;
+        font-size: 42px;
+    }
+
+    .verify-card h1 {
+        font-size: clamp(28px, 7vw, 32px);
+    }
+
+    .description {
+        font-size: 15px;
+    }
+
+    .code-inputs {
+        gap: clamp(4px, 1.8vw, 7px);
+    }
+
+    .code-inputs input {
+        width: clamp(32px, 11vw, 48px);
+        height: clamp(52px, 14vw, 58px);
+
+        font-size: clamp(20px, 6vw, 23px);
+    }
+}
+
+
+@media (max-width: 400px) {
+    .verify-page {
+        padding: 24px 12px;
+    }
+
+    .verify-card {
+        padding: 32px 14px 30px;
+    }
+
+    .code-inputs {
+        gap: clamp(3px, 1.3vw, 5px);
+    }
+
+    .code-inputs input {
+        width: clamp(30px, 11vw, 43px);
+        height: 53px;
+    }
+
+    .verify-card h1 {
+        font-size: clamp(24px, 8vw, 28px);
+    }
+
+    .verify-form {
+        margin-top: 32px;
+    }
+
+    .verify-button {
+        height: 56px;
+        margin-top: 30px;
+    }
+}
