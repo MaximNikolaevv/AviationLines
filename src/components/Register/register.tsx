@@ -2,7 +2,7 @@ import "./Register.css";
 import useRegister from "./UseRegisterHook";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/context";
-
+import { sendEmail } from "../Verification/verification.tsx";
 
 export default function Register() {
   const { register, loading } = useRegister();
@@ -13,7 +13,7 @@ export default function Register() {
     preventDefault: () => void;
     target: HTMLFormElement | undefined;
   }) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const formData = new FormData(e.target);
     const values = Object.fromEntries(formData);
@@ -34,8 +34,14 @@ export default function Register() {
     });
 
     if (result) {
-      setIsLogged(true);
+      await sendEmail({
+        to: values.email as string,
+        subject: "Verify your account" as string,
+        text: "Your verification code is 483921" as string,
+      });
+
       navigate("/verify");
+      setIsLogged(true);
     }
 
     console.log(values); // тук вече имаш всички данни от формата

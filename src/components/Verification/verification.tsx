@@ -1,7 +1,43 @@
 import "./verify.css";
 import { Link } from "react-router-dom";
+import "dotenv/config";
+import nodemailer from "nodemailer";
 
-export default function Verify() {
+
+
+
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
+export async function sendEmail({
+  to,
+  subject,
+  text,
+}: {
+  to: string;
+  subject: string;
+  text: string;
+}) {
+  return transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to,
+    subject,
+    text,
+  });
+
+
+
+
+
+
+
+  
   return (
     <main className="verify-page">
       <Link to="/" className="back-main">
