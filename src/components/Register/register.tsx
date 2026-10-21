@@ -2,7 +2,6 @@ import "./Register.css";
 import useRegister from "./UseRegisterHook";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/context";
-import { sendEmail } from "../Verification/verification.tsx";
 
 export default function Register() {
   const { register, loading } = useRegister();
@@ -34,12 +33,6 @@ export default function Register() {
     });
 
     if (result) {
-      await sendEmail({
-        to: values.email as string,
-        subject: "Verify your account" as string,
-        text: "Your verification code is 483921" as string,
-      });
-
       navigate("/verify");
       setIsLogged(true);
     }
