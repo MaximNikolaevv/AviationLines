@@ -1,43 +1,7 @@
 import "./verify.css";
 import { Link } from "react-router-dom";
-import "dotenv/config";
-import nodemailer from "nodemailer";
 
-
-
-
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
-
-export async function sendEmail({
-  to,
-  subject,
-  text,
-}: {
-  to: string;
-  subject: string;
-  text: string;
-}) {
-  return transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to,
-    subject,
-    text,
-  });
-
-
-
-
-
-
-
-  
+export default function Verify() {
   return (
     <main className="verify-page">
       <Link to="/" className="back-main">
@@ -81,15 +45,12 @@ export async function sendEmail({
 
           <div className="expiration">
             <span className="clock">◷</span>
-
             <span>Code expires in</span>
-
             <strong>09:56</strong>
           </div>
 
           <div className="resend">
             <p>Didn't receive the code?</p>
-
             <button type="button">↻ Resend code</button>
           </div>
 
@@ -100,7 +61,6 @@ export async function sendEmail({
 
           <div className="security-message">
             <span>♢</span>
-
             <p>Your account is safe with us</p>
           </div>
         </form>
