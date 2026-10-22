@@ -9,11 +9,6 @@ config({ path: envPath });
 const emailUser = process.env.EMAIL_USER;
 const emailPassword = process.env.EMAIL_PASSWORD;
 
-console.info("Email configuration:", {
-  userConfigured: Boolean(emailUser),
-  passwordConfigured: Boolean(emailPassword),
-});
-
 export const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
