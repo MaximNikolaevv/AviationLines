@@ -3,7 +3,6 @@ import useRegister from "./UseRegisterHook";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/context";
 
-
 export default function Register() {
   const { register, loading } = useRegister();
   const { setIsLogged } = useUserContext();
@@ -13,7 +12,7 @@ export default function Register() {
     preventDefault: () => void;
     target: HTMLFormElement | undefined;
   }) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const formData = new FormData(e.target);
     const values = Object.fromEntries(formData);
@@ -34,8 +33,8 @@ export default function Register() {
     });
 
     if (result) {
+      navigate("/verify");
       setIsLogged(true);
-      navigate("/");
     }
 
     console.log(values); // тук вече имаш всички данни от формата

@@ -1,6 +1,8 @@
+import "dotenv/config";
 import { Router } from "express";
 import AuthService from "../service/AuthService.js";
 import { createToken } from "../JWT/JsWebToken.js";
+import { transporter } from "../Verify-account/nodemailer.js";
 
 const AuthControllers = Router();
 
@@ -24,9 +26,22 @@ AuthControllers.post("/register", async (req, res) => {
       password,
     });
 
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: user.email,
+        subject: "Verify your account",
+        text: "Your verification code is 483921",
+      });
+    } catch (err) {
+      console.error("Registration verification email failed:", err);
+      return res.status(502).json({
+        message: "Account created, but verification email could not be sent",
+      });
+    }
+
     const jwt = await createToken(user);
     res.cookie("auth", jwt, { httpOnly: true });
-    console.log("Register auth cookie:", jwt);
 
     return res.status(201).json({
       message: "User registered successfully",
@@ -54,9 +69,22 @@ AuthControllers.post("/login", async (req, res) => {
     }
 
     const user = await AuthService.login({ email, password });
+    try {
+      await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: user.email,
+        subject: "Verify your account",
+        text: "Your verification code is 483921",
+      });
+    } catch (err) {
+      console.error("Login verification email failed:", err);
+      return res.status(502).json({
+        message: "Login succeeded, but verification email could not be sent",
+      });
+    }
+
     const jwt = await createToken(user);
     res.cookie("auth", jwt, { httpOnly: true });
-    console.log("Login auth cookie:", jwt);
 
     return res.json({
       message: "Login successful",
