@@ -22,7 +22,7 @@
     "leaflet": "^1.9.4",
     "leaflet-marker-rotation": "^0.4.0",
     "mongoose": "^9.10.1",
-    "nodemailer": "^10.1.2",
+    "nodemailer": "^10.2.0",
     "npm": "^11.19.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

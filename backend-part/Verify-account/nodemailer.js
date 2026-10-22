@@ -1,19 +1,27 @@
-import "dotenv/config";
+import { config } from "dotenv";
 import nodemailer from "nodemailer";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const transporter = nodemailer.createTransport({
+const envPath = resolve(dirname(fileURLToPath(import.meta.url)), "../.env");
+config({ path: envPath });
+
+const emailUser = process.env.EMAIL_USER;
+const emailPassword = process.env.EMAIL_PASSWORD;
+
+console.info("Email configuration:", {
+  userConfigured: Boolean(emailUser),
+  passwordConfigured: Boolean(emailPassword),
+});
+
+export const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
+    user: emailUser,
+    pass: emailPassword,
   },
 });
 
-export async function sendEmail({ to, subject, text }) {
-  return transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to,
-    subject,
-    text,
-  });
-}
+
+// dirname() → намира директорията на даден файл
+// resolve() → изгражда абсолютен path

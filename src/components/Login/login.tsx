@@ -1,7 +1,7 @@
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import useLogin from "./UseLoginHook.tsx";
-import { useUserContext } from "../../context/context";
+import { useUserContext } from "../../context/context.ts";
 
 export default function Login() {
   const { login, loading} = useLogin();
@@ -28,8 +28,10 @@ export default function Login() {
 
     if (result) {
       setIsLogged(true);
-      navigate("/");
-    }
+      navigate("/verify");
+    }  
+
+    
     
   };
 
