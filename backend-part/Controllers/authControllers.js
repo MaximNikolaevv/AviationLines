@@ -4,7 +4,7 @@ import { Router } from "express";
 import AuthService from "../service/AuthService.js";
 import { createToken } from "../JWT/JsWebToken.js";
 import { transporter } from "../Verify-account/nodemailer.js";
-import { saveVerificationCode, verifyCode } from "../Verify-account/verificationCodes.js"; // Използва общото съхранение на кодове в backend-а.
+import { saveVerificationCode, verifyCode,} from "../Verify-account/verificationCodes.js"; // Използва общото съхранение на кодове в backend-а.
 
 const AuthControllers = Router();
 
@@ -40,11 +40,13 @@ AuthControllers.post("/register", async (req, res) => {
     } catch (err) {
       console.error("Registration verification email failed:", err);
       return res.status(502).json({
-        message: "Профилът е създаден, но имейлът за потвърждение не можа да бъде изпратен",
+        message:
+          "Профилът е създаден, но имейлът за потвърждение не можа да бъде изпратен",
       });
     }
 
-    return res.status(201).json({ // Указва на клиента да отвори формата за потвърждение.
+    return res.status(201).json({
+      // Указва на клиента да отвори формата за потвърждение.
       message: "Кодът за потвърждение е изпратен",
       user: {
         id: user._id,
@@ -83,7 +85,8 @@ AuthControllers.post("/login", async (req, res) => {
     } catch (err) {
       console.error("Login verification email failed:", err);
       return res.status(502).json({
-        message: "Влизането бе успешно, но имейлът с кода за потвърждение не можа да бъде изпратен",
+        message:
+          "Влизането бе успешно, но имейлът с кода за потвърждение не можа да бъде изпратен",
       });
     }
 
@@ -94,58 +97,70 @@ AuthControllers.post("/login", async (req, res) => {
   }
 });
 
-AuthControllers.post("/verify", async (req, res) => { 
+AuthControllers.post("/verify", async (req, res) => {
   try {
     const { email, code } = req.body;
 
-    if (typeof email !== "string" || typeof code !== "string" || !/^\d{6}$/.test(code)) { 
-      return res.status(400).json({ message: "Необходим е имейл и шестцифрен код" }); 
-    } 
+    if (
+      typeof email !== "string" ||
+      typeof code !== "string" ||
+      !/^\d{6}$/.test(code)
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Необходим е имейл и шестцифрен код" });
+    }
 
-    const normalizedEmail = email.trim().toLowerCase(); 
-    const user = await AuthService.findUserByEmail(normalizedEmail); 
-    if (!user || !verifyCode(user.email, code)) { // Сравнява въведения код със запазения на сървъра.
-      return res.status(400).json({ message: "Кодът за потвърждение е невалиден или изтекъл" }); // Не разкрива коя стойност е грешна.
-    } // Край на проверката на кода.
+    const normalizedEmail = email.trim().toLowerCase();
+    const user = await AuthService.findUserByEmail(normalizedEmail);
+    if (!user || !verifyCode(user.email, code)) {
+      // Сравнява въведения код със запазения на сървъра.
+      return res
+        .status(400)
+        .json({ message: "Кодът за потвърждение е невалиден или изтекъл" }); // Не разкрива коя стойност е грешна.
+    }
 
-    const jwt = await createToken(user); 
-    res.cookie("auth", jwt, { httpOnly: true }); 
+    const jwt = await createToken(user);
+    res.cookie("auth", jwt, { httpOnly: true });
     return res.json({ message: "Профилът е потвърден успешно" });
-  } catch (err) { 
+  } catch (err) {
     console.error("Грешка при потвърждение:", err);
-    return res.status(500).json({ message: "Потвърждението не бе успешно" }); 
-  } 
-}); 
+    return res.status(500).json({ message: "Потвърждението не бе успешно" });
+  }
+});
 
-AuthControllers.post("/resend-code", async (req, res) => { // Изпраща нов код по заявка на потребителя.
-  try { 
+AuthControllers.post("/resend-code", async (req, res) => {
+  // Изпраща нов код по заявка на потребителя.
+  try {
     const { email } = req.body;
 
-    if (typeof email !== "string" || !email.trim()) { 
-      return res.status(400).json({ message: "Необходим е имейл адрес" }); 
-    } 
+    if (typeof email !== "string" || !email.trim()) {
+      return res.status(400).json({ message: "Необходим е имейл адрес" });
+    }
 
-    const normalizedEmail = email.trim().toLowerCase(); 
-    const user = await AuthService.findUserByEmail(normalizedEmail); 
-    if (!user) { 
+    const normalizedEmail = email.trim().toLowerCase();
+    const user = await AuthService.findUserByEmail(normalizedEmail);
+    if (!user) {
       return res.status(404).json({ message: "Профилът не е намерен" });
-    } 
+    }
 
     const verificationCode = randomInt(100000, 1000000).toString();
-    await transporter.sendMail({ // Изпраща новия код на притежателя на профила.
-      from: process.env.EMAIL_USER, // Използва зададения адрес на подателя.
-      to: user.email, // Изпраща само на регистрирания имейл.
-      subject: "Нов код за потвърждение", // Обяснява причината за писмото.
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: "Нов код за потвърждение",
       text: `Кодът ви за потвърждение е ${verificationCode}`, // Включва новия код в имейла.
     }); // Край на изпращането на писмото.
     saveVerificationCode(user.email, verificationCode); // Заменя стария код и подновява срока и брояча на опитите.
 
-    return res.json({ message: "Изпратихме нов код за потвърждение" }); 
-  } catch (err) { 
+    return res.json({ message: "Изпратихме нов код за потвърждение" });
+  } catch (err) {
     console.error("Неуспешно повторно изпращане на кода:", err);
-    return res.status(502).json({ message: "Новият код за потвърждение не можа да бъде изпратен" }); 
-  } 
-}); 
+    return res
+      .status(502)
+      .json({ message: "Новият код за потвърждение не можа да бъде изпратен" });
+  }
+});
 
 AuthControllers.post("/logout", (_req, res) => {
   res.clearCookie("auth");
