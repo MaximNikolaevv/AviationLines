@@ -272,15 +272,15 @@ body {
     display: flex;
 
     justify-content: center;
-
-    gap: 10px;
 }
 
 .code-inputs input {
-    width: 58px;
+    width: min(100%, 320px);
     height: 64px;
 
     text-align: center;
+    letter-spacing: 0.5em;
+    text-indent: 0.5em;
 
     color: #ffffff;
 
@@ -523,7 +523,6 @@ body {
     }
 
     .code-inputs input {
-        width: clamp(32px, 11vw, 48px);
         height: clamp(52px, 14vw, 58px);
 
         font-size: clamp(20px, 6vw, 23px);
@@ -545,7 +544,6 @@ body {
     }
 
     .code-inputs input {
-        width: clamp(30px, 11vw, 43px);
         height: 53px;
     }
 

@@ -1,11 +1,9 @@
 import "./Register.css";
 import useRegister from "./UseRegisterHook";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserContext } from "../../context/context";
 
 export default function Register() {
   const { register, loading } = useRegister();
-  const { setIsLogged } = useUserContext();
   const navigate = useNavigate();
 
   const onSubmit = async (e: {
@@ -33,11 +31,10 @@ export default function Register() {
     });
 
     if (result) {
+      sessionStorage.setItem("verificationEmail", values.email as string); // Запомня за кой профил е изпратен кодът.
       navigate("/verify");
-      setIsLogged(true);
     }
 
-    console.log(values); // тук вече имаш всички данни от формата
   };
 
   return (
